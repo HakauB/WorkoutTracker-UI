@@ -16,6 +16,11 @@ const headerItems = [
         to: './',
     },
     {
+        key: 'exercisetypes',
+        label: 'Exercise Types',
+        to: './exercisetypes',
+    },
+    {
         key: 'track',
         label: 'Track',
         to: './track',

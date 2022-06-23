@@ -6,6 +6,7 @@ import { MainLayout } from '../components/Layout/MainLayout';
 import { lazyImport } from '../utils/lazyImport';
 
 const { UserProfile } = lazyImport(() => import('../features/users'), 'UserProfile');
+const { ExerciseTypesRoutes } = lazyImport(() => import('../features/exercisetypes'), 'ExerciseTypesRoutes');
 
 const App = () => {
     return (
@@ -23,6 +24,7 @@ export const protectedRoutes = [
         element: <App />,
         children: [
             { path: 'profile', element: <UserProfile /> },
+            { path: 'exercisetypes/*', element: <ExerciseTypesRoutes /> },
         ]
     }
 ]
