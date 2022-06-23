@@ -23,6 +23,7 @@ export const CreateExerciseTypeModal = (props: CreateExerciseTypeModalProps) => 
             visible={isCreateExerciseTypeModalVisible}
             onCancel={hideCreateExerciseTypeModal}
             footer={null}
+            confirmLoading={isLoading}
         >
             <Form
                 form={form}
