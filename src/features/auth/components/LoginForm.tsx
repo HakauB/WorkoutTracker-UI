@@ -51,6 +51,7 @@ export const LoginForm = (props: LoginFormProps) => {
                             required: true,
                             message: 'Please input your email!',
                             validator(rule, value, callback) {
+                                // TODO: callback() deprecated
                                 if (!value) {
                                     callback('Please input your email!');
                                 } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)) {

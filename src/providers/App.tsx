@@ -8,13 +8,20 @@ import { Button, Spin} from 'antd';
 import { openNotification } from '../components/Notifications/Notifications';
 import { AuthProvider } from '../lib/auth';
 import { queryClient } from '../lib/react-query';
+import storage from '../utils/storage';
 
 const ErrorFallback = () => {
     return (
         <div>
             <h1>Something went wrong</h1>
             <Button
-                onClick={() => window.location.assign(window.location.origin)}
+                onClick={() => {
+                    if (storage.getToken()) {
+                        window.location.assign('/app');
+                    } else {
+                        window.location.assign('/');
+                    }
+                }}
             >
                 Go back to the homepage
             </Button>

@@ -43,5 +43,6 @@ export const useDeleteExerciseType = () => {
                 type: 'success'
             });
         },
+        mutationFn: deleteExerciseType,
     })
 }

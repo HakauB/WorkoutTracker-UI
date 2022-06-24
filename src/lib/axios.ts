@@ -23,6 +23,7 @@ axios.interceptors.response.use(
     },
     (error) => {
         const message = error.response?.data?.message || error.message;
+        // TODO: Actually want to do this?
         if (error.response.status === 401) {
             storage.clearToken();
         }
