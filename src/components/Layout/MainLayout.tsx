@@ -26,9 +26,26 @@ const headerItems = [
         to: './track',
     },
     {
-        key: 'workouts',
-        label: 'Workouts',
-        to: './workouts',
+        key: 'data',
+        label: 'Data',
+        to: './data',
+        children: [
+            {
+                key: 'workouts',
+                label: 'Workouts',
+                to: './data/workouts',
+            },
+            {
+                key: 'exercises',
+                label: 'Exercises',
+                to: './data/exercises',
+            },
+            {
+                key: 'exercisesets',
+                label: 'Exercise Sets',
+                to: './data/exercisesets',
+            },
+        ]
     },
     {
         key: 'settings',
@@ -41,7 +58,6 @@ const headerItems = [
         to: './profile',
     }
 ];
-
 
 export const MainLayout = (props: MainLayoutProps) => {
     const { logout } = useAuth();
@@ -58,9 +74,19 @@ export const MainLayout = (props: MainLayoutProps) => {
                 >
                     {headerItems.map(item => (
                         <Menu.Item key={item.key}>
-                            <Link to={item.to}>
-                                {item.label}
-                            </Link>
+                            {
+                                item.children ? (
+                                    <Menu.SubMenu title={item.label}>
+                                        {item.children.map(child => (
+                                            <Menu.Item key={child.key}>
+                                                <Link to={child.to}>{child.label}</Link>
+                                            </Menu.Item>
+                                        ))}
+                                    </Menu.SubMenu>
+                                ) : (
+                                    <Link to={item.to}>{item.label}</Link>
+                                )
+                            }
                         </Menu.Item>
                     ))}
                     <Menu.Item key='logout' onClick={() => logout()}>
@@ -68,6 +94,7 @@ export const MainLayout = (props: MainLayoutProps) => {
                             Logout
                         </Link>
                     </Menu.Item>
+                
                 </Menu>
             </Layout.Header>
             <Layout.Content

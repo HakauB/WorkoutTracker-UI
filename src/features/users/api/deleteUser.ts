@@ -10,7 +10,7 @@ export type DeleteUserDTO = {
     id: string;
 }
 
-export const deleteUser = (data: DeleteUserDTO): Promise<User> => {
+export const deleteUser = (data: DeleteUserDTO) => {
     return axios.delete(`/users/${data.id}/`);
 }
 

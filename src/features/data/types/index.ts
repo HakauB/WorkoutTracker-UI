@@ -20,3 +20,17 @@ export type ExerciseSet = {
     weight: number;
     percentage?: number;
 } & BaseEntity;
+
+///////////////////////////////////////////////////////////////////////////////
+
+export type ExerciseNested = {
+    date_performed: string;
+    exercise_type: string;
+    exercise_sets: ExerciseSet[];
+} & BaseEntity;
+
+export type WorkoutNested = {
+    date_performed: string;
+    name: string;
+    exercises: ExerciseNested[];
+} & BaseEntity;

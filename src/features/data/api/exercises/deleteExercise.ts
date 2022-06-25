@@ -9,7 +9,7 @@ export type DeleteExerciseDTO = {
     exerciseId: string;
 }
 
-export const deleteExercise = (data: DeleteExerciseDTO): Promise<Exercise> => {
+export const deleteExercise = (data: DeleteExerciseDTO) => {
     return axios.delete(`/exercises/${data.exerciseId}`);
 }
 
