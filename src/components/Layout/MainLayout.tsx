@@ -21,9 +21,9 @@ const headerItems = [
         to: './exercisetypes',
     },
     {
-        key: 'track',
-        label: 'Track',
-        to: './track',
+        key: 'tracker',
+        label: 'Tracker',
+        to: './tracker',
     },
     {
         key: 'data',
