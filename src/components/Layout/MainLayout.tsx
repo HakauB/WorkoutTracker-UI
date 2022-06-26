@@ -94,12 +94,14 @@ export const MainLayout = (props: MainLayoutProps) => {
                             Logout
                         </Link>
                     </Menu.Item>
-                
                 </Menu>
             </Layout.Header>
             <Layout.Content
                 style={{
                     padding: '0 50px',
+                    marginTop: 64,
+                    // fit to screen size
+                    minHeight: 'calc(100vh - 128px)',
                 }}
             >
                 {props.children}

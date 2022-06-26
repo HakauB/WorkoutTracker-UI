@@ -57,18 +57,25 @@ export const ExerciseSetForm = (props: ExerciseSetFormProps) => {
                                             <Input placeholder="Percentage" />
                                         </Form.Item>
 
-                                        <MinusCircleOutlined 
+                                        <MinusCircleOutlined
                                             onClick={() => {
                                                 remove(exerciseSet.name)
                                             }}
                                         />
-
                                     </Space>
                                 ))}
-                                <Form.Item>
+                                <Form.Item
+                                    style={{
+                                        marginBottom: 0,
+                                    }}
+                                >
                                     <Button
                                         type="dashed"
                                         onClick={() => add()}
+                                        // style={{
+                                            // float: "right",
+                                            // width: '100%',
+                                        // }}
                                     >
                                         <PlusOutlined /> Add exercise set
                                     </Button>
