@@ -48,6 +48,23 @@ const headerItems = [
         ]
     },
     {
+        key: 'charts',
+        label: 'Charts',
+        to: './charts',
+        children: [
+            {
+                key: 'linechart',
+                label: 'Exercise Type Line',
+                to: './charts/linechart',
+            },
+            {
+                key: 'lineschart',
+                label: 'Exercise Type Lines',
+                to: './charts/lineschart',
+            }
+        ]
+    },
+    {
         key: 'settings',
         label: 'Settings',
         to: './settings',

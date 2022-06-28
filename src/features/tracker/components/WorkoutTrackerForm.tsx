@@ -112,6 +112,7 @@ export const WorkoutTrackerForm = () => {
                                                 extra={<MinusCircleOutlined onClick={() => remove([field.name])} />}
                                                 style={{
                                                     borderRadius: '10px',
+                                                    minHeight: '411px',
                                                 }}
                                             >
                                                 <Form.Item
@@ -152,11 +153,16 @@ export const WorkoutTrackerForm = () => {
                                         <Card
                                             style={{
                                                 borderRadius: '10px',
+
                                             }}
                                         >
                                             <Button
                                                 type="dashed"
                                                 onClick={() => add()}
+                                                style={{
+                                                    width: '100%',
+                                                    minHeight: '361px',
+                                                }}
                                             >
                                                 <PlusOutlined /> Add Exercise
                                             </Button>
