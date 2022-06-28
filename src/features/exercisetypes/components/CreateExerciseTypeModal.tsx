@@ -10,7 +10,7 @@ type CreateExerciseTypeModalProps = {
 export const CreateExerciseTypeModal = (props: CreateExerciseTypeModalProps) => {
     const [form] = Form.useForm();
     const { mutateAsync, isLoading } = useCreateExerciseType();
-    const {isCreateExerciseTypeModalVisible, hideCreateExerciseTypeModal } = useModalStore();
+    const { isCreateExerciseTypeModalVisible, hideCreateExerciseTypeModal } = useModalStore();
 
     const handleSubmit = (values: any) => {
         hideCreateExerciseTypeModal();

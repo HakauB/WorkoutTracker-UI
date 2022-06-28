@@ -1,5 +1,6 @@
 import { Suspense } from 'react';
 import { Spin } from 'antd';
+// import { Calendar } from 'antd';
 import { Navigate, Outlet } from 'react-router-dom';
 
 import { MainLayout } from '../components/Layout/MainLayout';
@@ -10,6 +11,8 @@ const { ExerciseTypesRoutes } = lazyImport(() => import('../features/exercisetyp
 const { DataRoutes } = lazyImport(() => import('../features/data'), 'DataRoutes');
 const { TrackerRoutes } = lazyImport(() => import('../features/tracker'), 'TrackerRoutes');
 const { ChartRoutes } = lazyImport(() => import('../features/charts'), 'ChartRoutes');
+const { Calendar } = lazyImport(() => import('../features/calendar'), 'Calendar');
+
 
 const App = () => {
     return (
@@ -31,6 +34,7 @@ export const protectedRoutes = [
             { path: 'data/*', element: <DataRoutes /> },
             { path: 'tracker/*', element: <TrackerRoutes /> },
             { path: 'charts/*', element: <ChartRoutes /> },
+            { path: '', element: <Calendar /> },
         ]
     }
 ]

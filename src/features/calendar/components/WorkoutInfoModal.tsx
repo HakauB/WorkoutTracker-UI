@@ -1,0 +1,55 @@
+import { Card, List, Modal, Spin } from "antd";
+import { useModalStore } from "../../../stores/modals";
+import { useWorkoutNested } from "../../data";
+import { useWorkout } from "../../data/api/workouts";
+import { Workout } from "../../data/types";
+import { useExerciseType } from "../../exercisetypes/api/getExerciseType";
+import { useExerciseTypes } from "../../exercisetypes/api/getExerciseTypes";
+
+type WorkoutInfoModalProps = {
+    // onClose: () => void;
+    workout: Workout;
+}
+
+export const WorkoutInfoModal = (props: WorkoutInfoModalProps) => {
+    const { data: workoutData, isLoading: isLoadingWorkoutData } = useWorkoutNested(props.workout.id);
+    const { data: exerciseTypes, isLoading: isLoadingExerciseTypes } = useExerciseTypes();
+    const { isCalendarWorkoutInfoModalVisible, hideCalendarWorkoutInfoModal } = useModalStore();
+
+    if (isLoadingWorkoutData) {
+        return <Spin />;
+    }
+
+    if (!workoutData) {
+        return null;
+    }
+
+    return (
+        <Modal
+            title={props.workout.name + ' - ' + props.workout.date_performed}
+            visible={isCalendarWorkoutInfoModalVisible}
+            onCancel={hideCalendarWorkoutInfoModal}
+            onOk={hideCalendarWorkoutInfoModal}
+        >
+            {workoutData.exercises.map((exercise) => (
+                <Card
+                    key={exercise.id}
+                    title={exerciseTypes?.find(exerciseType => exerciseType.id === exercise.exercise_type)?.name}
+                    style={{
+                        marginBottom: '16px',
+                    }}
+                >
+                    <p>{exercise.exercise_sets.map((set) => (
+                        <List>
+                            <List.Item>
+                                <List.Item.Meta
+                                    title={set.reps + ' reps of ' + set.weight}
+                                />
+                            </List.Item>
+                        </List>
+                    ))}</p>
+                </Card>
+            ))}
+        </Modal>
+    )
+}

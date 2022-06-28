@@ -5,7 +5,7 @@ import { openNotification } from "../../../../components/Notifications/Notificat
 
 import { WorkoutNested } from "../../types";
 
-export const getWorkoutNested = (id: string): Promise<WorkoutNested[]> => {
+export const getWorkoutNested = (id: string): Promise<WorkoutNested> => {
     return axios.get(`/workoutsnested/${id}`);
 }
 
