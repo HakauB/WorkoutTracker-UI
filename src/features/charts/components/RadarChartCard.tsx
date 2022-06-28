@@ -81,6 +81,9 @@ const ResponsiveRadarChart = (props: ResponsiveRadarChartProps) => {
         <Radar 
             data={data}
             options={radarChartOptions}
+            style={{
+                maxHeight: 'calc(100vh - 400px)',
+            }}
         />
     )
 }

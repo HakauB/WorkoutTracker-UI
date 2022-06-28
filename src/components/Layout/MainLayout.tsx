@@ -59,8 +59,13 @@ const headerItems = [
             },
             {
                 key: 'lineschart',
-                label: 'Exercise Type Lines',
+                label: 'Exercise Types Lines',
                 to: './charts/lineschart',
+            },
+            {
+                key: 'radarchart',
+                label: 'Exercise Types Radar',
+                to: './charts/radarchart',
             }
         ]
     },

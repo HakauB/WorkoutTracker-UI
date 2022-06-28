@@ -1,3 +1,5 @@
+// TODO: Clearing start or end date clears data in chart
+
 import { Card, DatePicker, Divider, Select, Spin } from "antd";
 import { Chart as ChartJS, CategoryScale, LinearScale, Title, Tooltip, Legend, LineElement, PointElement } from 'chart.js';
 import { Line } from "react-chartjs-2";
@@ -110,6 +112,9 @@ const ResponsiveLinesChart = (props: ResponsiveLinesChartProps) => {
         <Line
             data={data}
             options={linesChartOptions}
+            style={{
+                maxHeight: 'calc(100vh - 400px)',
+            }}
         />
     )
 }
@@ -143,7 +148,7 @@ export const LinesChartCard = (props: LinesChartCardProps) => {
 
     return (
         <Card
-            title="Line Chart"
+            title="Lines Chart"
             style={{
                 minHeight: '200px',
                 borderRadius: '8px',
@@ -151,8 +156,11 @@ export const LinesChartCard = (props: LinesChartCardProps) => {
         >
             <Select
                 mode="multiple"
-                placeholder="Select an exercise type"
+                placeholder="Select exercise types"
                 onChange={onChange}
+                style={{
+                    minWidth: '200px',
+                }}
             >
                 {exerciseTypes.map((exerciseType: ExerciseType) => (
                     <Select.Option key={exerciseType.id} value={exerciseType.id}>
