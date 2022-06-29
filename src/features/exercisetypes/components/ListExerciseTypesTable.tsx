@@ -43,11 +43,13 @@ export const ListExerciseTypesTable = (props: ListExerciseTypesTableProps) => {
             title: "First Performed",
             dataIndex: "first_date_performed",
             key: "first_date_performed",
+            sorter: (a: any, b: any) => new Date(a.first_date_performed).getTime() - new Date(b.first_date_performed).getTime(),
         },
         {
             title: "Last Performed",
             dataIndex: "last_date_performed",
             key: "last_date_performed",
+            sorter: (a: any, b: any) => new Date(a.last_date_performed).getTime() - new Date(b.last_date_performed).getTime(),
         },
         {
             title: "Sets Performed",

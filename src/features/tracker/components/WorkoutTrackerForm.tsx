@@ -8,7 +8,7 @@ import { useExerciseTypes } from '../../exercisetypes/api/getExerciseTypes';
 
 import { useCreateWorkoutNested, CreateWorkoutNestedDTO, WorkoutNested } from '../../data';
 import moment from 'moment';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const mapValuesToWorkoutNestedDTO = (values: any) => {
     const workoutNestedDTO = {
@@ -41,11 +41,13 @@ export const WorkoutTrackerForm = (props: WorkoutTrackerFormProps) => {
     const { control } = useForm();
     const params = useParams();
     const { data: exerciseTypes, isLoading: isLoadingExerciseTypes } = useExerciseTypes();
+    const navigate = useNavigate();
 
     const { mutateAsync, isLoading } = useCreateWorkoutNested();
 
-    const onSubmit = (values: any) => {
-        console.log(values);
+    const handleSubmit = (values: any) => {
+        // console.log(values);
+        navigate('/app');
     }
 
     if (isLoadingExerciseTypes) {
@@ -69,7 +71,7 @@ export const WorkoutTrackerForm = (props: WorkoutTrackerFormProps) => {
                 onFinish={async (values: any) => {
                     console.log(mapValuesToWorkoutNestedDTO(values));
                     await mutateAsync({ data: mapValuesToWorkoutNestedDTO(values) });
-                    onSubmit(values);
+                    handleSubmit(values);
                 }}
             >
                 <Form.Item

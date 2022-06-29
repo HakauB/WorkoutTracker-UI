@@ -27,43 +27,51 @@ export const ExercisesTable = (props: ExercisesTableProps) => {
 
     if (!exercises) return null;
 
-    console.log(exercises);
+    const columns = [
+        {
+            title: 'Exercise Type',
+            dataIndex: 'exercise_type',
+            key: 'exercise_type',
+            render: (exercise_type: any) =>
+                <span>
+                    {exerciseTypes!.find((exerciseType: ExerciseType) => exerciseType.id === exercise_type)!.name}
+                </span>,
+            filters: exerciseTypes!.map((exerciseType: ExerciseType) => ({ text: exerciseType.name, value: exerciseType.id })),
+            onFilter: (value: any, record: ExerciseNested) => exerciseTypes?.find((exerciseType: ExerciseType) => exerciseType.id === record.exercise_type)?.id === value,
+        },
+        {
+            title: 'Date',
+            dataIndex: 'date_performed',
+            key: 'date_performed',
+            sorter: (a: ExerciseNested, b: ExerciseNested) => new Date(a.date_performed).getTime() - new Date(b.date_performed).getTime(),
+        },
+        {
+            title: 'Sets', dataIndex: 'exercise_sets', key: 'exercise_sets', render: (sets: any) => {
+                return (
+                    <Table
+                        columns={[
+                            { title: 'Reps', dataIndex: 'reps', key: 'reps' },
+                            { title: 'Weight', dataIndex: 'weight', key: 'weight' },
+                            { title: 'Percentage', dataIndex: 'percentage', key: 'percentage' },
+                        ]}
+                        dataSource={sets}
+                        pagination={false}
+                        size="small"
+                    />
+                )
+            }
+        },
+    ]
 
     return (
         <Table
             dataSource={exercises}
-            columns={[
-                {
-                    title: 'Exercise Type', dataIndex: 'exercise_type', key: 'exercise_type', render: (exercise_type: any) => <span>{
-                        exerciseTypes!.find((exerciseType: ExerciseType) => exerciseType.id === exercise_type)!.name
-                    }</span>,
-                    filters: exerciseTypes!.map((exerciseType: ExerciseType) => ({ text: exerciseType.name, value: exerciseType.id })),
-                    onFilter: (value: any, record: ExerciseNested) => exerciseTypes?.find((exerciseType: ExerciseType) => exerciseType.id === record.exercise_type)?.id === value,
-                },
-                { title: 'Date', dataIndex: 'date_performed', key: 'date_performed' },
-                {
-                    title: 'Sets', dataIndex: 'exercise_sets', key: 'exercise_sets', render: (sets: any) => {
-                        return (
-                            <Table
-                                columns={[
-                                    { title: 'Reps', dataIndex: 'reps', key: 'reps' },
-                                    { title: 'Weight', dataIndex: 'weight', key: 'weight' },
-                                    { title: 'Percentage', dataIndex: 'percentage', key: 'percentage' },
-                                ]}
-                                dataSource={sets}
-                                pagination={false}
-                                size="small"
-                            />
-                        )
-                    }
-                },
-            ]}
+            columns={columns}
             rowKey="id"
             pagination={{
                 showSizeChanger: true,
                 showQuickJumper: true,
                 showTotal: (total: number) => `Total: ${total} items`,
-                // pageSize: 10,
             }}
             sticky
         />

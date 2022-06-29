@@ -27,36 +27,39 @@ export const ExerciseSetTable = (props: ExerciseSetTableProps) => {
     if (!exerciseSets) return null;
     if (!exerciseTypes) return null;
 
+    const columns = [
+        {
+            title: "Exercise Type",
+            dataIndex: "exercise_type",
+            key: "exercise_type",
+            render: (exerciseTypeId: string) =>
+                <span>
+                    {exerciseTypes.find((exerciseType: ExerciseType) => exerciseType.id === exerciseTypeId)!.name}
+                </span>,
+            filters: exerciseTypes.map((exerciseType: ExerciseType) => ({ text: exerciseType.name, value: exerciseType.id })),
+            onFilter: (value: any, record: ExerciseSet) => exerciseTypes.find((exerciseType: ExerciseType) => exerciseType.id === record.exercise_type)?.id === value,
+        },
+        {
+            title: "Date",
+            dataIndex: "date_performed",
+            key: "date_performed",
+            sorter: (a: ExerciseSet, b: ExerciseSet) => new Date(a.date_performed).getTime() - new Date(b.date_performed).getTime(),
+
+        },
+        { title: "Reps", dataIndex: "reps", key: "reps" },
+        { title: "Weight", dataIndex: "weight", key: "weight" },
+        { title: "Percentage", dataIndex: "percentage", key: "percentage" },
+    ]
+
     return (
-        <Table 
+        <Table
             dataSource={exerciseSets}
-            columns={[
-                {
-                    title: "Exercise Type",
-                    dataIndex: "exercise_type",
-                    key: "exercise_type",
-                    render: (exerciseTypeId: string) => <span>
-                        {exerciseTypes.find((exerciseType: ExerciseType) => exerciseType.id === exerciseTypeId)!.name}
-                    </span>,
-                    filters: exerciseTypes.map((exerciseType: ExerciseType) => ({ text: exerciseType.name, value: exerciseType.id })),
-                    onFilter: (value: any, record: ExerciseSet) => exerciseTypes.find((exerciseType: ExerciseType) => exerciseType.id === record.exercise_type)?.id === value,
-                },  
-                { 
-                    title: "Date", 
-                    dataIndex: "date_performed", 
-                    key: "date_performed",
-                     
-                },
-                { title: "Reps", dataIndex: "reps", key: "reps" },
-                { title: "Weight", dataIndex: "weight", key: "weight" },
-                { title: "Percentage", dataIndex: "percentage", key: "percentage" },
-            ]}
+            columns={columns}
             rowKey="id"
             pagination={{
                 showSizeChanger: true,
                 showQuickJumper: true,
                 showTotal: (total: number) => `Total: ${total} items`,
-                // pageSize: 10,
             }}
         />
     )
