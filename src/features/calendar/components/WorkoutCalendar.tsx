@@ -1,4 +1,4 @@
-import { Calendar, momentLocalizer } from 'react-big-calendar';
+import { Calendar, momentLocalizer, Navigate } from 'react-big-calendar';
 import moment from 'moment';
 import { useWorkouts, Workout } from '../../data';
 import { Spin } from 'antd';
@@ -6,6 +6,8 @@ import 'react-big-calendar/lib/css/react-big-calendar.css';
 import { WorkoutInfoModal } from './WorkoutInfoModal';
 import { useModalStore } from '../../../stores/modals';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useNavigationStore } from '../../../stores/navigation';
 
 const localizer = momentLocalizer(moment);
 
@@ -15,6 +17,7 @@ type WorkoutCalendarProps = {
 
 export const WorkoutCalendar = (props: WorkoutCalendarProps) => {
     // const { workouts } = props;
+    const navigate = useNavigate();
     const {data: workouts, isLoading } = useWorkouts();
     const { isCalendarWorkoutInfoModalVisible, showCalendarWorkoutInfoModal } = useModalStore();
     const [ selectedWorkout, setSelectedWorkout ] = useState<Workout | null>(null);
@@ -59,7 +62,7 @@ export const WorkoutCalendar = (props: WorkoutCalendarProps) => {
                     showCalendarWorkoutInfoModal();
                 }}
                 onSelectSlot={(slotInfo: any) => {
-                    console.log(slotInfo);
+                    navigate(`./tracker/${slotInfo.start}`);
                 }}
                 style={{ 
                     height: '85vh', 

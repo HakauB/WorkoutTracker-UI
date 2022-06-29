@@ -33,21 +33,23 @@ export const WorkoutInfoModal = (props: WorkoutInfoModalProps) => {
         >
             {workoutData.exercises.map((exercise) => (
                 <Card
-                    key={exercise.id}
                     title={exerciseTypes?.find(exerciseType => exerciseType.id === exercise.exercise_type)?.name}
                     style={{
                         marginBottom: '16px',
                     }}
                 >
-                    <p>{exercise.exercise_sets.map((set) => (
+                    {exercise.exercise_sets.map((set) => (
                         <List>
-                            <List.Item>
+                            {/* <List.Item
+                                key={set.id}
+                            > */}
                                 <List.Item.Meta
+                                    key={set.id}
                                     title={set.reps + ' reps of ' + set.weight}
                                 />
-                            </List.Item>
+                            {/* </List.Item> */}
                         </List>
-                    ))}</p>
+                    ))}
                 </Card>
             ))}
         </Modal>

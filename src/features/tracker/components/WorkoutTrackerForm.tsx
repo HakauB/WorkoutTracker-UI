@@ -7,6 +7,8 @@ import { ExerciseSetForm } from './ExerciseSetForm';
 import { useExerciseTypes } from '../../exercisetypes/api/getExerciseTypes';
 
 import { useCreateWorkoutNested, CreateWorkoutNestedDTO, WorkoutNested } from '../../data';
+import moment from 'moment';
+import { useParams } from 'react-router-dom';
 
 const mapValuesToWorkoutNestedDTO = (values: any) => {
     const workoutNestedDTO = {
@@ -31,8 +33,13 @@ const mapValuesToWorkoutNestedDTO = (values: any) => {
     return workoutNestedDTO;
 }
 
-export const WorkoutTrackerForm = () => {
+type WorkoutTrackerFormProps = {
+    // initial_date?: string;
+}
+
+export const WorkoutTrackerForm = (props: WorkoutTrackerFormProps) => {
     const { control } = useForm();
+    const params = useParams();
     const { data: exerciseTypes, isLoading: isLoadingExerciseTypes } = useExerciseTypes();
 
     const { mutateAsync, isLoading } = useCreateWorkoutNested();
@@ -76,6 +83,7 @@ export const WorkoutTrackerForm = () => {
                 <Form.Item
                     name="date_performed"
                     label="Date Performed"
+                    initialValue={params.initial_date ? moment(params.initial_date) : null}
                     rules={[{ required: true, message: "Please enter date performed" }]}
                 >
                     <DatePicker />

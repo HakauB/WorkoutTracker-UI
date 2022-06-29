@@ -5,6 +5,7 @@ export const TrackerRoutes = () => {
     return (
         <Routes>
             <Route path="" element={<WorkoutTracker />} />
+            <Route path=":initial_date" element={<WorkoutTracker />} />
         </Routes>
     )
 }

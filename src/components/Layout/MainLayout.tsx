@@ -1,9 +1,10 @@
 import * as React from 'react';
 import { Layout, Menu } from 'antd';
-import { Link } from 'react-router-dom';
+import { Link, NavLink, useLocation } from 'react-router-dom';
 
 import { useThemeStore } from '../../stores/theme';
 import { useAuth } from '../../lib/auth';
+import { useNavigationStore } from '../../stores/navigation';
 
 type MainLayoutProps = {
     children: React.ReactNode;
@@ -84,6 +85,13 @@ const headerItems = [
 export const MainLayout = (props: MainLayoutProps) => {
     const { logout } = useAuth();
     const { theme } = useThemeStore();
+    const location = useLocation();
+
+    let selectedItem = headerItems.find(item => item.to.split('/')[1] === location.pathname.split('/')[2]);
+    if (!selectedItem) {
+        selectedItem = headerItems[0];
+    }
+    // console.log(selectedItem)
 
     return (
         <Layout className='layout'>
@@ -91,7 +99,8 @@ export const MainLayout = (props: MainLayoutProps) => {
                 <Menu
                     theme={theme}
                     mode='horizontal'
-                    defaultSelectedKeys={['home']}
+                    // defaultSelectedKeys={['home']}
+                    selectedKeys={[selectedItem.key]}
                     style={{ lineHeight: '64px' }}
                 >
                     {headerItems.map(item => (
@@ -101,12 +110,12 @@ export const MainLayout = (props: MainLayoutProps) => {
                                     <Menu.SubMenu title={item.label}>
                                         {item.children.map(child => (
                                             <Menu.Item key={child.key}>
-                                                <Link to={child.to}>{child.label}</Link>
+                                                <NavLink to={child.to}>{child.label}</NavLink>
                                             </Menu.Item>
                                         ))}
                                     </Menu.SubMenu>
                                 ) : (
-                                    <Link to={item.to}>{item.label}</Link>
+                                    <NavLink to={item.to}>{item.label}</NavLink>
                                 )
                             }
                         </Menu.Item>
