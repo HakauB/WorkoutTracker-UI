@@ -8,6 +8,10 @@ type ModalStore = {
     isCalendarWorkoutInfoModalVisible: boolean;
     showCalendarWorkoutInfoModal: () => void;
     hideCalendarWorkoutInfoModal: () => void;
+
+    isConfirmDeleteExerciseTypeModalVisible: boolean;
+    showConfirmDeleteExerciseTypeModal: () => void;
+    hideConfirmDeleteExerciseTypeModal: () => void;
 }
 
 export const useModalStore = create<ModalStore>((set) => ({
@@ -25,5 +29,13 @@ export const useModalStore = create<ModalStore>((set) => ({
     })),
     hideCalendarWorkoutInfoModal: () => set((state) => ({
         isCalendarWorkoutInfoModalVisible: false
+    })),
+
+    isConfirmDeleteExerciseTypeModalVisible: false,
+    showConfirmDeleteExerciseTypeModal: () => set((state) => ({
+        isConfirmDeleteExerciseTypeModalVisible: true
+    })),
+    hideConfirmDeleteExerciseTypeModal: () => set((state) => ({
+        isConfirmDeleteExerciseTypeModalVisible: false
     }))
 }));

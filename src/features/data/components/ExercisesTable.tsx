@@ -27,6 +27,8 @@ export const ExercisesTable = (props: ExercisesTableProps) => {
 
     if (!exercises) return null;
 
+    console.log(exercises);
+
     return (
         <Table
             dataSource={exercises}
@@ -50,11 +52,20 @@ export const ExercisesTable = (props: ExercisesTableProps) => {
                                 ]}
                                 dataSource={sets}
                                 pagination={false}
+                                size="small"
                             />
                         )
                     }
                 },
             ]}
+            rowKey="id"
+            pagination={{
+                showSizeChanger: true,
+                showQuickJumper: true,
+                showTotal: (total: number) => `Total: ${total} items`,
+                // pageSize: 10,
+            }}
+            sticky
         />
     )
 }

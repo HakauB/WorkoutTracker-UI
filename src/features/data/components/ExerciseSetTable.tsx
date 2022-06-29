@@ -1,6 +1,5 @@
 import { Spin, Table } from "antd";
 import { ExerciseType } from "../../exercisetypes";
-import { getExerciseType } from "../../exercisetypes/api/getExerciseType";
 import { useExerciseTypes } from "../../exercisetypes/api/getExerciseTypes";
 import { useExerciseSets } from "../api/exercisesets";
 import { ExerciseSet } from "../types";
@@ -52,6 +51,13 @@ export const ExerciseSetTable = (props: ExerciseSetTableProps) => {
                 { title: "Weight", dataIndex: "weight", key: "weight" },
                 { title: "Percentage", dataIndex: "percentage", key: "percentage" },
             ]}
+            rowKey="id"
+            pagination={{
+                showSizeChanger: true,
+                showQuickJumper: true,
+                showTotal: (total: number) => `Total: ${total} items`,
+                // pageSize: 10,
+            }}
         />
     )
 }

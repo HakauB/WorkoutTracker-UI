@@ -17,11 +17,15 @@ export const CreateExerciseTypeModal = (props: CreateExerciseTypeModalProps) => 
         props.onSubmit(values);
     }
 
+    const handleCancel = () => {
+        hideCreateExerciseTypeModal();
+    }
+
     return (
         <Modal
             title="Create Exercise Type"
             visible={isCreateExerciseTypeModalVisible}
-            onCancel={hideCreateExerciseTypeModal}
+            onCancel={handleCancel}
             footer={null}
             confirmLoading={isLoading}
         >
@@ -29,6 +33,7 @@ export const CreateExerciseTypeModal = (props: CreateExerciseTypeModalProps) => 
                 form={form}
                 onFinish={async (values: any) => {
                     await mutateAsync({data: values});
+                    form.resetFields();
                     handleSubmit(values);
                 }}
             >

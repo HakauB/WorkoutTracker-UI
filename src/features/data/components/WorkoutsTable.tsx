@@ -22,8 +22,8 @@ export const WorkoutsList = (props: WorkoutsListProps) => {
             <Spin
                 style={{
                     width: "100%",
-                    maxWidth: "600px",
-                    margin: "0 auto",
+                    // maxWidth: "600px",
+                    // margin: "0 auto",
                 }}
             />
         )
@@ -137,8 +137,8 @@ export const WorkoutsList = (props: WorkoutsListProps) => {
                         title={workout.name}
                         extra={workout.date_performed}
                         style={{
-                            width: "100%",
-                            maxWidth: "600px",
+                            // width: "100%",
+                            // maxWidth: "600px",
                         }}
                     >
                         <Table
@@ -156,6 +156,7 @@ export const WorkoutsList = (props: WorkoutsListProps) => {
                                         render: (sets: any) => {
                                             return (
                                                 <Table
+                                                    size="small"
                                                     columns={
                                                         [
                                                             {
@@ -190,9 +191,9 @@ export const WorkoutsList = (props: WorkoutsListProps) => {
                 )
             }}
             style={{
-                width: "100%",
+                // width: "100%",
                 // center the list horizontally
-                margin: "0 auto",
+                // margin: "0 auto",
             }}
         />
     )
