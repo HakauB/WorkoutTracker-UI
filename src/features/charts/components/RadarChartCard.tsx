@@ -134,7 +134,7 @@ export const RadarChartCard = (props: RadarChartCardProps) => {
                         placeholder="Select exercise types"
                         onChange={onChange}
                         style={{
-                            minWidth: '200px',
+                            minWidth: '160px',
                         }}
                     >
                         {exerciseTypes.map((exerciseType: ExerciseType) => (
@@ -172,10 +172,14 @@ export const RadarChartCard = (props: RadarChartCardProps) => {
                         onChange={(value) => {
                             setCalculation(value);
                         }}
+                        defaultValue={calculation}
+                        style={{
+                            minWidth: '80px',
+                        }}
                     >
-                        <Select.Option value="sum">Sum</Select.Option>
                         <Select.Option value="average">Average</Select.Option>
                         <Select.Option value="max">Max</Select.Option>
+                        <Select.Option value="sum">Sum</Select.Option>
                     </Select>
                 </Space>
             </Space>

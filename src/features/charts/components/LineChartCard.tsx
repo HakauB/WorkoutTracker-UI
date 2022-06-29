@@ -190,6 +190,9 @@ export const LineChartCard = (props: LineChartCardProps) => {
                             const et = exerciseTypes.find((exerciseType: ExerciseType) => exerciseType.id === value);
                             setExerciseType(et!);
                         }}
+                        style={{
+                            minWidth: '175px',
+                        }}
                     >
                         {exerciseTypes.map((exerciseType: ExerciseType) => (
                             <Select.Option key={exerciseType.id} value={exerciseType.id}>
@@ -227,6 +230,9 @@ export const LineChartCard = (props: LineChartCardProps) => {
                             setCalculation(value);
                         }}
                         defaultValue={calculation}
+                        style={{
+                            minWidth: '80px',
+                        }}
                     >
                         <Select.Option value="average">Average</Select.Option>
                         <Select.Option value="max">Max</Select.Option>
