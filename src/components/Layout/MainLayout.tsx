@@ -2,6 +2,8 @@ import * as React from 'react';
 import { Layout, Menu } from 'antd';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 
+import { UserOutlined, HomeOutlined, OrderedListOutlined, FolderAddOutlined, TableOutlined, LineChartOutlined } from '@ant-design/icons';
+
 import { useThemeStore } from '../../stores/theme';
 import { useAuth } from '../../lib/auth';
 import { useNavigationStore } from '../../stores/navigation';
@@ -15,21 +17,25 @@ const headerItems = [
         key: 'home',
         label: 'Home',
         to: './',
+        icon: <HomeOutlined />
     },
     {
         key: 'exercisetypes',
         label: 'Exercise Types',
         to: './exercisetypes',
+        icon: <OrderedListOutlined />
     },
     {
         key: 'tracker',
         label: 'Tracker',
         to: './tracker',
+        icon: <FolderAddOutlined />
     },
     {
         key: 'data',
         label: 'Data',
         to: './data',
+        icon: <TableOutlined />,
         children: [
             {
                 key: 'workouts',
@@ -52,6 +58,7 @@ const headerItems = [
         key: 'charts',
         label: 'Charts',
         to: './charts',
+        icon: <LineChartOutlined />,
         children: [
             {
                 key: 'linechart',
@@ -71,15 +78,34 @@ const headerItems = [
         ]
     },
     {
-        key: 'settings',
-        label: 'Settings',
-        to: './settings',
-    },
-    {
-        key: 'profile',
-        label: 'Profile',
-        to: './profile',
+        key: 'user',
+        label: 'User',
+        to: './user',
+        icon: <UserOutlined />,
+        rightSide: true,
+        children: [
+            {
+                key: 'profile',
+                label: 'Profile',
+                to: './user/profile',
+            },
+            {
+                key: 'logout',
+                label: 'Logout',
+                to: './logout',
+            }
+        ]
     }
+    // {
+    //     key: 'settings',
+    //     label: 'Settings',
+    //     to: './settings',
+    // },
+    // {
+    //     key: 'profile',
+    //     label: 'Profile',
+    //     to: './profile',
+    // }
 ];
 
 export const MainLayout = (props: MainLayoutProps) => {
@@ -87,6 +113,7 @@ export const MainLayout = (props: MainLayoutProps) => {
     const { theme } = useThemeStore();
     const location = useLocation();
 
+    // TODO: Extend to sub-menus
     let selectedItem = headerItems.find(item => item.to.split('/')[1] === location.pathname.split('/')[2]);
     if (!selectedItem) {
         selectedItem = headerItems[0];
@@ -104,27 +131,31 @@ export const MainLayout = (props: MainLayoutProps) => {
                     style={{ lineHeight: '64px' }}
                 >
                     {headerItems.map(item => (
-                        <Menu.Item key={item.key}>
-                            {
-                                item.children ? (
-                                    <Menu.SubMenu title={item.label}>
-                                        {item.children.map(child => (
-                                            <Menu.Item key={child.key}>
-                                                <NavLink to={child.to}>{child.label}</NavLink>
-                                            </Menu.Item>
-                                        ))}
-                                    </Menu.SubMenu>
-                                ) : (
-                                    <NavLink to={item.to}>{item.label}</NavLink>
-                                )
-                            }
-                        </Menu.Item>
+                        item.children ? (
+                            <Menu.SubMenu
+                                title={item.label}
+                                key={item.key}
+                                icon={item.icon}
+                                style={item.rightSide ? { marginLeft: 'auto' } : undefined}
+                            >
+                                {item.children.map(child => (
+                                    <Menu.Item key={child.key}
+                                        onClick={child.key === 'logout' ? () => logout() : undefined}
+                                    >
+                                        <NavLink to={child.to}>{child.label}</NavLink>
+                                    </Menu.Item>
+                                ))}
+                            </Menu.SubMenu>
+                        ) : (
+                            <Menu.Item
+                                key={item.key}
+                                icon={item.icon}
+                            >
+                                <NavLink to={item.to}>{item.label}</NavLink>
+                            </Menu.Item>
+                        )
                     ))}
-                    <Menu.Item key='logout' onClick={() => logout()}>
-                        <Link to='./logout'>
-                            Logout
-                        </Link>
-                    </Menu.Item>
+
                 </Menu>
             </Layout.Header>
             <Layout.Content

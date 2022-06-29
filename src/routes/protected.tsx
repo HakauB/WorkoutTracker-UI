@@ -6,7 +6,7 @@ import { Navigate, Outlet } from 'react-router-dom';
 import { MainLayout } from '../components/Layout/MainLayout';
 import { lazyImport } from '../utils/lazyImport';
 
-const { UserProfile } = lazyImport(() => import('../features/users'), 'UserProfile');
+const { UserRoutes } = lazyImport(() => import('../features/users'), 'UserRoutes');
 const { ExerciseTypesRoutes } = lazyImport(() => import('../features/exercisetypes'), 'ExerciseTypesRoutes');
 const { DataRoutes } = lazyImport(() => import('../features/data'), 'DataRoutes');
 const { TrackerRoutes } = lazyImport(() => import('../features/tracker'), 'TrackerRoutes');
@@ -29,7 +29,7 @@ export const protectedRoutes = [
         path: '/app',
         element: <App />,
         children: [
-            { path: 'profile', element: <UserProfile /> },
+            { path: 'user/*', element: <UserRoutes /> },
             { path: 'exercisetypes/*', element: <ExerciseTypesRoutes /> },
             { path: 'data/*', element: <DataRoutes /> },
             { path: 'tracker/*', element: <TrackerRoutes /> },
