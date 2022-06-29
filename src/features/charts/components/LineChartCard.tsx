@@ -1,6 +1,6 @@
 // TODO: Clearing start or end date clears data in chart
 
-import { Card, DatePicker, Divider, Select, Spin } from "antd";
+import { Card, DatePicker, Divider, Select, Space, Spin } from "antd";
 import { Chart as ChartJS, CategoryScale, LinearScale, Title, Tooltip, Legend, LineElement, PointElement } from 'chart.js';
 import { Line } from "react-chartjs-2";
 import { ExerciseType } from '../../exercisetypes';
@@ -20,6 +20,32 @@ ChartJS.register(
     Legend,
 )
 
+const gapFillLine = (weights: number[]) => {
+    if (weights.length < 3) {
+        return weights;
+    }
+    return weights.map((weight, i) => {
+        if (weight === 0) {
+            return weight;
+        }
+        if (weights[i + 1] !== 0) {
+            return weight;
+        }
+        let j = i + 1;
+        let gaps = 0;
+        while (weights[j] === 0) {
+            gaps++;
+            j++;
+        }
+        let difference = weights[j] - weights[i];
+        let step = difference / (gaps + 1);
+        for (let k = i; k <= j; k++) {
+            weights[k] = weights[i] + step * (k - i);
+        }
+        return weight;
+    });
+}
+
 export const lineChartOptions = {
     responsive: true,
     plugins: {
@@ -29,6 +55,11 @@ export const lineChartOptions = {
         title: {
             display: true,
             text: 'Exercise Type Chart',
+        }
+    },
+    scales: {
+        y: {
+            min: 0,
         }
     }
 }
@@ -56,8 +87,9 @@ const ResponsiveLineChart = (props: ResponsiveLineChartProps) => {
     }
 
     const getDayDates = (startDate: string, endDate: string) => {
-        const startDateMoment = startDate !== '' ? moment(startDate) : moment(exerciseSets[0].date_performed);
-        const endDateMoment = endDate !== '' ? moment(endDate) : moment(exerciseSets[exerciseSets.length - 1].date_performed);
+        const sortedExerciseSets = exerciseSets.sort((a, b) => moment(a.date_performed).diff(moment(b.date_performed)));
+        const startDateMoment = startDate !== '' ? moment(startDate) : moment(sortedExerciseSets[0].date_performed);
+        const endDateMoment = endDate !== '' ? moment(endDate) : moment(sortedExerciseSets[sortedExerciseSets.length - 1].date_performed);
         const dayDates = [];
         while (startDateMoment.isSameOrBefore(endDateMoment)) {
             dayDates.push(startDateMoment.format('YYYY-MM-DD'));
@@ -69,34 +101,43 @@ const ResponsiveLineChart = (props: ResponsiveLineChartProps) => {
     // console.log(exerciseSets);
     const dayDates = getDayDates(props.startDate, props.endDate);
 
+    const weights = dayDates.map(dayDate => {
+        const currExerciseSets = exerciseSets.filter(exerciseSet => exerciseSet.date_performed === dayDate && exerciseSet.exercise_type === props.exerciseType.id);
+        if (props.calculation === 'average') {
+            const averageWeight = currExerciseSets.reduce((acc, curr) => {
+                return acc + curr.weight;
+            }, 0) / currExerciseSets.length;
+            if (isNaN(averageWeight)) {
+                return 0;
+            }
+            else {
+                return averageWeight;
+            }
+        }
+        else if (props.calculation === 'sum') {
+            const sumWeight = currExerciseSets.reduce((acc, curr) => {
+                return acc + curr.weight;
+            }, 0);
+            return sumWeight;
+        }
+        else {
+            return currExerciseSets.reduce((acc, exerciseSet) => Math.max(acc, exerciseSet.weight), 0);
+        }
+    })
+
     const data = {
         labels: dayDates,
         datasets: [
             {
                 label: props.exerciseType.name,
-                data: dayDates.map(dayDate => {
-                    const currExerciseSets = exerciseSets.filter(exerciseSet => exerciseSet.date_performed === dayDate && exerciseSet.exercise_type === props.exerciseType.id);
-                    if (props.calculation === 'average') {
-                        const averageWeight = currExerciseSets.reduce((acc, curr) => {
-                            return acc + curr.weight;
-                        }, 0) / currExerciseSets.length;
-                        return averageWeight;
-                    }
-                    else if (props.calculation === 'sum') {
-                        const sumWeight = currExerciseSets.reduce((acc, curr) => {
-                            return acc + curr.weight;
-                        }, 0);
-                        return sumWeight;
-                    }
-                    else {
-                        return currExerciseSets.reduce((acc, exerciseSet) => Math.max(acc, exerciseSet.weight), 0);
-                    }
-                })
+                data: gapFillLine(weights),
+                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                borderColor: 'rgba(255, 99, 132, 1)',
             }
         ]
     }
 
-    console.log(data);
+    // console.log(data);
 
     return (
         <Line
@@ -115,9 +156,9 @@ type LineChartCardProps = {
 
 export const LineChartCard = (props: LineChartCardProps) => {
     const [exerciseType, setExerciseType] = useState<ExerciseType | null>(null);
-    const [ startDate, setStartDate ] = useState<string>("");
-    const [ endDate, setEndDate ] = useState<string>("");
-    const [ calculation, setCalculation ] = useState<string>("max");
+    const [startDate, setStartDate] = useState<string>("");
+    const [endDate, setEndDate] = useState<string>("");
+    const [calculation, setCalculation] = useState<string>("max");
     const { data: exerciseTypes, isLoading: isLoadingExerciseTypes } = useExerciseTypes();
 
     if (isLoadingExerciseTypes) {
@@ -136,51 +177,70 @@ export const LineChartCard = (props: LineChartCardProps) => {
                 borderRadius: '8px',
             }}
         >
-            <Select
-                placeholder="Select an exercise type"
-                onChange={(value: string) => {
-                    const et = exerciseTypes.find((exerciseType: ExerciseType) => exerciseType.id === value);
-                    setExerciseType(et!);
-                }}
+            <Space
+                direction="vertical"
             >
-                {exerciseTypes.map((exerciseType: ExerciseType) => (
-                    <Select.Option key={exerciseType.id} value={exerciseType.id}>
-                        {exerciseType.name}
-                    </Select.Option>
-                ))}
-            </Select>
+                <Space
+                    direction="horizontal"
+                >
+                    Exercise type:
+                    <Select
+                        placeholder="Select an exercise type"
+                        onChange={(value: string) => {
+                            const et = exerciseTypes.find((exerciseType: ExerciseType) => exerciseType.id === value);
+                            setExerciseType(et!);
+                        }}
+                    >
+                        {exerciseTypes.map((exerciseType: ExerciseType) => (
+                            <Select.Option key={exerciseType.id} value={exerciseType.id}>
+                                {exerciseType.name}
+                            </Select.Option>
+                        ))}
+                    </Select>
+                </Space>
 
-            <DatePicker
-                placeholder="Start Date"
-                onChange={(date, dateString) => {
-                    setStartDate((moment(dateString).format('YYYY-MM-DD')));
-                }}
-            />
-
-            <DatePicker
-                placeholder="End Date"
-                onChange={(date, dateString) => {
-                    setEndDate(moment(dateString).format('YYYY-MM-DD'));
-                }}
-            />
-
-            <Select
-                placeholder="Calculation"
-                onChange={(value) => {
-                    setCalculation(value);
-                }}
-            >
-                <Select.Option value="sum">Sum</Select.Option>
-                <Select.Option value="average">Average</Select.Option>
-                <Select.Option value="max">Max</Select.Option>
-            </Select>
+                <Space
+                    direction="horizontal"
+                >
+                    Dates:
+                    <DatePicker
+                        placeholder="Start Date"
+                        onChange={(date, dateString) => {
+                            setStartDate((moment(dateString).format('YYYY-MM-DD')));
+                        }}
+                    />
+                    -
+                    <DatePicker
+                        placeholder="End Date"
+                        onChange={(date, dateString) => {
+                            setEndDate(moment(dateString).format('YYYY-MM-DD'));
+                        }}
+                    />
+                </Space>
+                <Space
+                    direction="horizontal"
+                >
+                    Calculation:
+                    <Select
+                        // placeholder="Calculation"
+                        onChange={(value) => {
+                            setCalculation(value);
+                        }}
+                        defaultValue={calculation}
+                    >
+                        <Select.Option value="average">Average</Select.Option>
+                        <Select.Option value="max">Max</Select.Option>
+                        <Select.Option value="sum">Sum</Select.Option>
+                    </Select>
+                </Space>
+            </Space>
 
             <Divider />
 
 
             {/* {exerciseType && <ResponsiveLineChart exerciseType={exerciseType} />} */}
 
-            { exerciseType && <ResponsiveLineChart exerciseType={exerciseType!} startDate={startDate} endDate={endDate} calculation={calculation} /> }
+            {exerciseType && <ResponsiveLineChart exerciseType={exerciseType!} startDate={startDate} endDate={endDate} calculation={calculation} />}
         </Card>
     )
 }
