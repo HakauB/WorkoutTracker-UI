@@ -22,18 +22,22 @@ export const RegisterForm = (props: RegisterFormProps) => {
                 width: '100%',
                 maxWidth: '600px',
                 margin: '0 auto',
+                position: 'absolute',
+                top: '50%',
+                left: '50%',
+                transform: 'translate(-50%, -50%)',
             }}
         >
             <h1>Register</h1>
             <Form
                 {...formLayout}
                 name="register"
-                labelCol={{
-                    span: 8,
-                }}
-                wrapperCol={{
-                    span: 16,
-                }}
+                // labelCol={{
+                    // span: 8,
+                // }}
+                // wrapperCol={{
+                    // span: 16,
+                // }}
                 initialValues={{
                     remember: true,
                 }}
@@ -62,6 +66,13 @@ export const RegisterForm = (props: RegisterFormProps) => {
                             },
                         },
                     ]}
+                    wrapperCol={{
+                        span: 14,
+                        offset: 0,
+                    }}
+                    labelCol={{
+                        span: 6,
+                    }}
                 >
                     <Input />
                 </Form.Item>
@@ -75,6 +86,13 @@ export const RegisterForm = (props: RegisterFormProps) => {
                             message: 'Please input your password!'
                         }
                     ]}
+                    wrapperCol={{
+                        span: 14,
+                        offset: 0,
+                    }}
+                    labelCol={{
+                        span: 6,
+                    }}
                 >
                     <Input type='password' />
                 </Form.Item>
@@ -88,25 +106,43 @@ export const RegisterForm = (props: RegisterFormProps) => {
                             message: 'Please confirm your password!'
                         }
                     ]}
+                    wrapperCol={{
+                        span: 14,
+                        offset: 0,
+                    }}
+                    labelCol={{
+                        span: 6,
+                    }}
                 >
                     <Input type='password' />
                 </Form.Item>
 
-                <Form.Item
-                    wrapperCol={{
-                        offset: 8,
-                        span: 16,
+                <Space
+                    direction='horizontal'
+                    size='large'
+                    style={{
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                        alignItems: 'center',
                     }}
                 >
-                    <Button type="primary" htmlType="submit" loading={isRegistering}>
-                        Register
-                    </Button>
-                    <Link to="../login" style={{
-                        float: 'right',
-                    }}>
+                    <Link 
+                        to="../login" 
+                    >
                         Login
                     </Link>
-                </Form.Item>
+
+                    <Button
+                        type="primary"
+                        htmlType="submit"
+                        loading={isRegistering}
+                        style={{
+                            marginRight: '100px',
+                        }}
+                    >
+                        Register
+                    </Button>
+                </Space>
             </Form>
         </Space>
     )

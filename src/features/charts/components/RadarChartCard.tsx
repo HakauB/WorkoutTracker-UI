@@ -30,6 +30,11 @@ export const radarChartOptions = {
             display: true,
             text: 'Exercise Types Chart',
         },
+    },
+    scales: {
+        r: {
+            min: 0,
+        },
     }
 }
 

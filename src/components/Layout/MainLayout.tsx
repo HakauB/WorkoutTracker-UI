@@ -92,7 +92,7 @@ const headerItems = [
             {
                 key: 'logout',
                 label: 'Logout',
-                to: './logout',
+                to: '/logout',
             }
         ]
     }
@@ -161,9 +161,9 @@ export const MainLayout = (props: MainLayoutProps) => {
             <Layout.Content
                 style={{
                     padding: '0 50px',
-                    marginTop: 64,
+                    marginTop: 32,
                     // fit to screen size
-                    minHeight: 'calc(100vh - 128px)',
+                    minHeight: 'calc(100vh - 96px)',
                 }}
             >
                 {props.children}

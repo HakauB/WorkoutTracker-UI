@@ -16,13 +16,22 @@ export const axios = Axios.create({
     baseURL: 'http://localhost:8000'
 });
 
+const parseErrorResponseData = (error: any) => {
+    if (error.response?.data) {
+        return Object.entries(error.response.data).map(([key, value]) => {
+            return value;
+        });
+    }
+    return error.message;
+}
+
 axios.interceptors.request.use(authRequestInterceptor);
 axios.interceptors.response.use(
     (response) => {
         return response.data;
     },
     (error) => {
-        const message = error.response?.data?.message || error.message;
+        const message = parseErrorResponseData(error)// || error.message;
         // TODO: Actually want to do this?
         if (error.response.status === 401) {
             storage.clearToken();

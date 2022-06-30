@@ -22,18 +22,17 @@ export const LoginForm = (props: LoginFormProps) => {
                 width: '100%',
                 maxWidth: '600px',
                 margin: '0 auto',
+                position: 'absolute',
+                top: '50%',
+                left: '50%',
+                transform: 'translate(-50%, -50%)',
             }}
         >
             <h1>Login</h1>
+
             <Form
                 {...formLayout}
                 name="login"
-                labelCol={{
-                    span: 8,
-                }}
-                wrapperCol={{
-                    span: 16,
-                }}
                 initialValues={{
                     remember: true,
                 }}
@@ -43,6 +42,7 @@ export const LoginForm = (props: LoginFormProps) => {
                 }}
                 autoComplete="off"
             >
+
                 <Form.Item
                     name="email"
                     label="Email"
@@ -79,21 +79,31 @@ export const LoginForm = (props: LoginFormProps) => {
                     <Input type='password' />
                 </Form.Item>
 
-                <Form.Item
-                    wrapperCol={{
-                        offset: 8,
-                        span: 16,
+                <Space
+                    direction='horizontal'
+                    size='large'
+                    style={{
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                        alignItems: 'center',
                     }}
                 >
-                    <Button type="primary" htmlType="submit" loading={isLoggingIn}>
-                        Log in
-                    </Button>
-                    <Link to="../register" style={{
-                        float: 'right',
-                    }}>
+                    <Link
+                        to="../register"
+                    >
                         Register
                     </Link>
-                </Form.Item>
+                    <Button
+                        type="primary"
+                        htmlType="submit"
+                        loading={isLoggingIn}
+                        style={{
+                            marginRight: '100px',
+                        }}
+                    >
+                        Log in
+                    </Button>
+                </Space>
             </Form>
         </Space>
     )

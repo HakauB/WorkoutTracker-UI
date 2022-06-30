@@ -5,6 +5,7 @@ import { Navigate, Outlet } from 'react-router-dom';
 
 import { MainLayout } from '../components/Layout/MainLayout';
 import { lazyImport } from '../utils/lazyImport';
+import { NoPageFound } from '../components/Error/NoPageFound';
 
 const { UserRoutes } = lazyImport(() => import('../features/users'), 'UserRoutes');
 const { ExerciseTypesRoutes } = lazyImport(() => import('../features/exercisetypes'), 'ExerciseTypesRoutes');
@@ -35,6 +36,7 @@ export const protectedRoutes = [
             { path: 'tracker/*', element: <TrackerRoutes /> },
             { path: 'charts/*', element: <ChartRoutes /> },
             { path: '', element: <Calendar /> },
+            { path: '*', element: <NoPageFound /> },
         ]
     }
 ]
