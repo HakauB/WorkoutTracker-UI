@@ -73,10 +73,12 @@ type ResponsiveLinesChartProps = {
 }
 
 const ResponsiveLinesChart = (props: ResponsiveLinesChartProps) => {
-    // const { data: exerciseSets, isLoading: isLoadingExerciseSets } = useExerciseSets();
-    const { data: exerciseSets, isLoading: isLoadingExerciseSets } = useExerciseSetsWithParams(
-        { exercise_type: props.exerciseTypes.map((exerciseType) => exerciseType.id), start_date: props.startDate, end_date: props.endDate }
-    );
+    
+    const { data: exerciseSets, isLoading: isLoadingExerciseSets } = useExerciseSetsWithParams({
+        exercise_type: props.exerciseTypes.map((exerciseType) => exerciseType.id),
+        start_date: props.startDate !== '' ? props.startDate : undefined,
+        end_date: props.endDate !== '' ? props.endDate : undefined,
+    });
 
     if (isLoadingExerciseSets) {
         return <Spin />;
@@ -218,14 +220,22 @@ export const LinesChartCard = (props: LinesChartCardProps) => {
                     <DatePicker
                         placeholder="Start Date"
                         onChange={(date, dateString) => {
-                            setStartDate((moment(dateString).format('YYYY-MM-DD')));
+                            if (date?.isValid()) {
+                                setStartDate((moment(dateString).format('YYYY-MM-DD')));
+                            } else {
+                                setStartDate("");
+                            }
                         }}
                     />
                     -
                     <DatePicker
                         placeholder="End Date"
                         onChange={(date, dateString) => {
-                            setEndDate(moment(dateString).format('YYYY-MM-DD'));
+                            if (date?.isValid()) {
+                                setEndDate((moment(dateString).format('YYYY-MM-DD')));
+                            } else {
+                                setEndDate("");
+                            }
                         }}
                     />
                 </Space>

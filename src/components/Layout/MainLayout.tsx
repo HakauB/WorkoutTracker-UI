@@ -8,6 +8,8 @@ import { useThemeStore } from '../../stores/theme';
 import { useAuth } from '../../lib/auth';
 import { useNavigationStore } from '../../stores/navigation';
 
+import logo from '../../assets/logo.png';
+
 type MainLayoutProps = {
     children: React.ReactNode;
 }
@@ -122,14 +124,27 @@ export const MainLayout = (props: MainLayoutProps) => {
 
     return (
         <Layout className='layout'>
-            <Layout.Header>
+            <Layout.Header
+                style={{
+                    paddingLeft: '0px',
+                    paddingRight: '50px',
+                    backgroundColor: 'white',
+                }}
+            >
                 <Menu
                     theme={theme}
                     mode='horizontal'
                     // defaultSelectedKeys={['home']}
                     selectedKeys={[selectedItem.key]}
-                    style={{ lineHeight: '64px' }}
+                    style={{ 
+                        lineHeight: '64px',
+                    }}
                 >
+                    <div>
+                        <Link to="/">
+                            <img src={logo} height='50' />
+                        </Link>
+                    </div>
                     {headerItems.map(item => (
                         item.children ? (
                             <Menu.SubMenu
@@ -166,6 +181,7 @@ export const MainLayout = (props: MainLayoutProps) => {
                     minHeight: 'calc(100vh - 96px)',
                 }}
             >
+
                 {props.children}
             </Layout.Content>
         </Layout>

@@ -2,6 +2,7 @@ import { Space, Spin } from "antd"
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom"
 import { useAuth } from "../../lib/auth";
+import { PublicLayout } from '../Layout/PublicLayout';
 
 type LoggedOutProps = {
 
@@ -9,7 +10,7 @@ type LoggedOutProps = {
 
 export const LoggedOut = (props: LoggedOutProps) => {
     const navigate = useNavigate();
-    const { isLoggingOut } = useAuth();
+    const { logout, isLoggingOut } = useAuth();
 
     const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 
@@ -27,19 +28,21 @@ export const LoggedOut = (props: LoggedOutProps) => {
     }
 
     return (
-        <Space
-            direction="vertical"
-            size="large"
-            style={{
-                position: "absolute",
-                top: "50%",
-                left: "50%",
-                transform: "translate(-50%, -50%)",
-            }}
-        >
-            <h1>You have been successfully logged out!</h1>
+        <PublicLayout>
+            <Space
+                direction="vertical"
+                size="large"
+                style={{
+                    position: "absolute",
+                    top: "50%",
+                    left: "50%",
+                    transform: "translate(-50%, -50%)",
+                }}
+            >
+                <h1>You have been successfully logged out!</h1>
 
-            <p>You will be redirected to the landing page shortly.</p>
-        </Space>
+                <p>You will be redirected to the landing page shortly.</p>
+            </Space>
+        </PublicLayout>
     )
 }

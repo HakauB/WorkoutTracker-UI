@@ -72,11 +72,12 @@ type ResponsiveLineChartProps = {
 }
 
 const ResponsiveLineChart = (props: ResponsiveLineChartProps) => {
-    // const { data: exerciseSets, isLoading: isLoadingExerciseSets } = useExerciseSetsForExerciseType({ exerciseTypeId: props.exerciseType.id });
-
-    const { data: exerciseSets, isLoading: isLoadingExerciseSets } = useExerciseSetsWithParams(
-        { exercise_type: [props.exerciseType.id], start_date: props.startDate, end_date: props.endDate }
-    )
+    
+    const { data: exerciseSets, isLoading: isLoadingExerciseSets } = useExerciseSetsWithParams({
+        exercise_type: [props.exerciseType.id],
+        start_date: moment(props.startDate).isValid() ? props.startDate : undefined,
+        end_date: moment(props.endDate).isValid() ? props.endDate : undefined,
+    });
 
     if (isLoadingExerciseSets) {
         return <Spin />;
@@ -98,7 +99,6 @@ const ResponsiveLineChart = (props: ResponsiveLineChartProps) => {
         return dayDates;
     }
 
-    // console.log(exerciseSets);
     const dayDates = getDayDates(props.startDate, props.endDate);
 
     const weights = dayDates.map(dayDate => {
@@ -136,8 +136,6 @@ const ResponsiveLineChart = (props: ResponsiveLineChartProps) => {
             }
         ]
     }
-
-    // console.log(data);
 
     return (
         <Line
@@ -209,14 +207,22 @@ export const LineChartCard = (props: LineChartCardProps) => {
                     <DatePicker
                         placeholder="Start Date"
                         onChange={(date, dateString) => {
-                            setStartDate((moment(dateString).format('YYYY-MM-DD')));
+                            if (date?.isValid()) {
+                                setStartDate((moment(dateString).format('YYYY-MM-DD')));
+                            } else {
+                                setStartDate("");
+                            }
                         }}
                     />
                     -
                     <DatePicker
                         placeholder="End Date"
                         onChange={(date, dateString) => {
-                            setEndDate(moment(dateString).format('YYYY-MM-DD'));
+                            if (date?.isValid()) {
+                                setEndDate((moment(dateString).format('YYYY-MM-DD')));
+                            } else {
+                                setEndDate("");
+                            }
                         }}
                     />
                 </Space>
