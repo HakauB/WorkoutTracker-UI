@@ -4,7 +4,7 @@ import { useQuery } from "react-query";
 import { ExerciseSet } from "../../types";
 import moment from "moment";
 
-export type GetExerciseSetsForExerciseTypeParams = {
+export type GetExerciseSetsWithParamsParams = {
     exercise_type?: string[];
     exercise?: string;
     start_date?: string;
@@ -12,7 +12,7 @@ export type GetExerciseSetsForExerciseTypeParams = {
     date_performed?: string;
 }
 
-export const getExerciseSetsWithParams = (params: GetExerciseSetsForExerciseTypeParams): Promise<ExerciseSet[]> => {
+export const getExerciseSetsWithParams = (params: GetExerciseSetsWithParamsParams): Promise<ExerciseSet[]> => {
     const queryParams = new URLSearchParams();
     if (params.exercise_type) {
         params.exercise_type.map(exerciseTypeId => queryParams.append("exercise_type", exerciseTypeId));
@@ -32,7 +32,7 @@ export const getExerciseSetsWithParams = (params: GetExerciseSetsForExerciseType
     return axios.get(`/exercisesets/?${queryParams.toString()}`);
 }
 
-export const useExerciseSetsWithParams = (params: GetExerciseSetsForExerciseTypeParams) => {
+export const useExerciseSetsWithParams = (params: GetExerciseSetsWithParamsParams) => {
     return useQuery(
         ["exercisesets", params],
         () => getExerciseSetsWithParams(params)

@@ -61,6 +61,10 @@ const ResponsiveRadarChart = (props: ResponsiveRadarChartProps) => {
         return null;
     }
 
+    if (paramExerciseSets.length === 0) {
+        return <h2>No data for these parameters.</h2>
+    }
+
     console.log(paramExerciseSets);
 
     const data = {

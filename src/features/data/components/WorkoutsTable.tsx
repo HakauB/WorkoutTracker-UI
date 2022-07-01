@@ -22,8 +22,6 @@ export const WorkoutsList = (props: WorkoutsListProps) => {
             <Spin
                 style={{
                     width: "100%",
-                    // maxWidth: "600px",
-                    // margin: "0 auto",
                 }}
             />
         )
@@ -32,29 +30,6 @@ export const WorkoutsList = (props: WorkoutsListProps) => {
     if (!workouts) return null;
 
     const mapWorkoutsToListItems = (workouts: Workout[], exercises: Exercise[], exerciseSets: ExerciseSet[], exerciseTypes: ExerciseType[]) => {
-        // return in format:
-        // [
-        //     {
-        //         key: "1",
-        //         title: "Workout 1",
-        //         date_performed: "2020-01-01",
-        //         exercises: [
-        //             {
-        //                 key: "1",
-        //                 exercise_type: "Exercise Type 1"
-        //                 sets: [
-        //                     {
-        //                         key: "1",
-        //                         reps: 10,
-        //                         weight: 100,
-        //                         percentage: 100,
-        //                      }
-        //                 ]
-        //             }
-        //         ]
-        //     }
-        // ]
-
         const mappedWorkouts = workouts.map((workout: Workout) => {
             const mappedExercises = exercises.filter((exercise: Exercise) => exercise.workout === workout.id);
             const mappedExerciseSets = exerciseSets.filter((exerciseSet: ExerciseSet) => mappedExercises.some((exercise: Exercise) => exercise.id === exerciseSet.exercise));
@@ -90,43 +65,6 @@ export const WorkoutsList = (props: WorkoutsListProps) => {
     }
 
     const listItems = mapWorkoutsToListItems(workouts, exercises!, exerciseSets!, exerciseTypes!);
-
-   //const columns = [
-   //    {
-   //        title: "Name",
-   //        dataIndex: "name",
-   //        key: "name",
-   //    },
-   //    {
-   //        title: "Date Performed",
-   //        dataIndex: "date_performed",
-   //        key: "date_performed",
-   //    },
-   //    {
-   //        title: "Exercises",
-   //        dataIndex: "exercises",
-   //        key: "exercises",
-   //        render: (exercises: any) => {
-   //            return (
-   //                <List
-   //                    dataSource={exercises}
-   //                    renderItem={(exercise: any) => {
-   //                        return (
-   //                            <List.Item>
-   //                                <List.Item.Meta
-   //                                    title={exercise.exercise_type}
-   //                                    description={exercise.sets.map((set: ExerciseSet) => {
-   //                                        return `${set.reps} reps @ ${set.weight}kg `
-   //                                    })}
-   //                                />
-   //                            </List.Item>
-   //                        )
-   //                    }}
-   //                />
-   //            )
-   //        }
-   //    }
-   //]
 
     return (
         <List 

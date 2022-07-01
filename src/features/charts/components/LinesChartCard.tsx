@@ -88,6 +88,10 @@ const ResponsiveLinesChart = (props: ResponsiveLinesChartProps) => {
         return null;
     }
 
+    if (exerciseSets.length === 0) {
+        return <h2>No data for these parameters.</h2>
+    }
+
     const getDayDates = (startDate: string, endDate: string) => {
         const sortedExerciseSets = exerciseSets.sort((a, b) => moment(a.date_performed).diff(moment(b.date_performed)));
         const startDateMoment = startDate !== '' ? moment(startDate) : moment(sortedExerciseSets[0].date_performed);

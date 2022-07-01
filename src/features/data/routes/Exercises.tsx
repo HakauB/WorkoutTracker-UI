@@ -1,7 +1,7 @@
-import { ExercisesTable } from "../components/ExercisesTable"
+import { ExercisesDisplay, ExercisesTable } from "../components/ExercisesDisplay"
 
 export const Exercises = () => {
     return (
-        <ExercisesTable />
+        <ExercisesDisplay />
     )
 }
