@@ -2,7 +2,6 @@ import { useParams } from "react-router-dom";
 
 import { Spin } from 'antd';
 import { useExerciseType } from "../api/getExerciseType";
-import { ExerciseType } from "../types";
 import { DetailExerciseType } from "../components/DetailExerciseType";
 
 export const ExerciseTypeView = () => {

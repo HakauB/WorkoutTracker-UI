@@ -1,7 +1,7 @@
 import { Card, List, Spin, Table } from "antd";
 import { ExerciseType } from "../../exercisetypes";
 import { useExerciseTypes } from "../../exercisetypes/api/getExerciseTypes";
-import { useExercises, useExercisesForWorkout } from "../api/exercises";
+import { useExercises } from "../api/exercises";
 import { useExerciseSets } from "../api/exercisesets";
 import { useWorkouts } from "../api/workouts";
 import { Exercise, ExerciseSet, Workout } from "../types";

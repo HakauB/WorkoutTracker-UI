@@ -1,9 +1,7 @@
 import { Card, List, Modal, Spin } from "antd";
 import { useModalStore } from "../../../stores/modals";
 import { useWorkoutNested } from "../../data";
-import { useWorkout } from "../../data/api/workouts";
 import { Workout } from "../../data/types";
-import { useExerciseType } from "../../exercisetypes/api/getExerciseType";
 import { useExerciseTypes } from "../../exercisetypes/api/getExerciseTypes";
 
 type WorkoutInfoModalProps = {
@@ -13,7 +11,7 @@ type WorkoutInfoModalProps = {
 
 export const WorkoutInfoModal = (props: WorkoutInfoModalProps) => {
     const { data: workoutData, isLoading: isLoadingWorkoutData } = useWorkoutNested(props.workout.id);
-    const { data: exerciseTypes, isLoading: isLoadingExerciseTypes } = useExerciseTypes();
+    const { data: exerciseTypes } = useExerciseTypes();
     const { isCalendarWorkoutInfoModalVisible, hideCalendarWorkoutInfoModal } = useModalStore();
 
     if (isLoadingWorkoutData) {

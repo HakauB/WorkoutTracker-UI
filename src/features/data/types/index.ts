@@ -1,5 +1,4 @@
 import { BaseEntity } from "../../../types";
-import { ExerciseType } from "../../exercisetypes";
 
 export type Workout = {
     name: string;

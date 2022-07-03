@@ -1,4 +1,3 @@
-import { MainLayout } from "../../../components/Layout/MainLayout";
 import { useAuth } from "../../../lib/auth";
 
 import { UserProfileForm } from "../components/UserProfileForm";

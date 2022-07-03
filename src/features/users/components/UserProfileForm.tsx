@@ -1,7 +1,4 @@
-import { Col, Form, Input, Row, Space } from 'antd';
-import { useEffect } from 'react';
-import { useUser } from '../api/getUser';
-import { useThemeStore } from '../../../stores/theme';
+import { Form, Input } from 'antd';
 import { User } from '../types';
 
 type UserProfileFormProps = {
@@ -9,8 +6,7 @@ type UserProfileFormProps = {
 }
 
 export const UserProfileForm = (props: UserProfileFormProps) => {
-    const { theme } = useThemeStore();
-
+    
     return (
         <Form
             name="basic"

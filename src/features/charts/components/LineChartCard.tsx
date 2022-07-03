@@ -6,7 +6,6 @@ import { Line } from "react-chartjs-2";
 import { ExerciseType } from '../../exercisetypes';
 import { useState } from "react";
 import { useExerciseTypes } from "../../exercisetypes/api/getExerciseTypes";
-import { useExerciseSetsForExerciseType } from "../../data/api/exercisesets/getExerciseSetsForExerciseType";
 import moment from "moment";
 import { useExerciseSetsWithParams } from "../../data/api/exercisesets/getExerciseSetsWithParams";
 

@@ -1,7 +1,7 @@
 import { Suspense } from 'react';
 import { Spin } from 'antd';
 // import { Calendar } from 'antd';
-import { Navigate, Outlet } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 
 import { MainLayout } from '../components/Layout/MainLayout';
 import { lazyImport } from '../utils/lazyImport';

@@ -1,6 +1,5 @@
-import { Navigate, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 
-import { ExerciseType } from "../types";
 import { CreateExerciseType } from "./CreateExerciseType";
 import { ExerciseTypes } from "./ExerciseTypes";
 import { ExerciseTypeView } from "./ExerciseTypeView";

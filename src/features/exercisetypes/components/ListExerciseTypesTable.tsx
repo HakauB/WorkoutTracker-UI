@@ -3,7 +3,7 @@ import { ExerciseType } from "../../exercisetypes";
 import { useExerciseTypes } from "../../exercisetypes/api/getExerciseTypes";
 import { useExerciseSets } from "../../data/api/exercisesets";
 import { ExerciseSet } from "../../data/types";
-import { DeleteRowOutlined, DeleteOutlined } from '@ant-design/icons';
+import { DeleteOutlined } from '@ant-design/icons';
 import { ConfirmDeleteExerciseTypeModal } from "./ConfirmDeleteExerciseTypeModal";
 import { useState } from "react";
 import { useModalStore } from "../../../stores/modals";

@@ -5,7 +5,6 @@ import { ReactQueryDevtools } from 'react-query/devtools';
 import { BrowserRouter as Router } from 'react-router-dom';
 
 import { Button, Spin} from 'antd';
-import { openNotification } from '../components/Notifications/Notifications';
 import { AuthProvider } from '../lib/auth';
 import { queryClient } from '../lib/react-query';
 import storage from '../utils/storage';

@@ -3,7 +3,7 @@ import { useMutation } from 'react-query';
 import { queryClient } from '../../../../lib/react-query';
 import { openNotification } from '../../../../components/Notifications/Notifications';
 
-import { ExerciseNested, ExerciseSet } from '../../types';
+import { ExerciseNested } from '../../types';
 
 export type CreateExerciseNestedDTO = {
     data: {

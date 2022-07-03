@@ -1,4 +1,4 @@
-import { Calendar, momentLocalizer, Navigate } from 'react-big-calendar';
+import { Calendar, momentLocalizer } from 'react-big-calendar';
 import moment from 'moment';
 import { useWorkouts, Workout } from '../../data';
 import { Card, Spin } from 'antd';
@@ -7,7 +7,6 @@ import { WorkoutInfoModal } from './WorkoutInfoModal';
 import { useModalStore } from '../../../stores/modals';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useNavigationStore } from '../../../stores/navigation';
 
 const localizer = momentLocalizer(moment);
 
@@ -19,7 +18,7 @@ export const WorkoutCalendar = (props: WorkoutCalendarProps) => {
     // const { workouts } = props;
     const navigate = useNavigate();
     const { data: workouts, isLoading } = useWorkouts();
-    const { isCalendarWorkoutInfoModalVisible, showCalendarWorkoutInfoModal } = useModalStore();
+    const { showCalendarWorkoutInfoModal } = useModalStore();
     const [selectedWorkout, setSelectedWorkout] = useState<Workout | null>(null);
 
     if (isLoading) {

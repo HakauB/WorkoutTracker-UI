@@ -6,7 +6,6 @@ import { UserOutlined, HomeOutlined, OrderedListOutlined, FolderAddOutlined, Tab
 
 import { useThemeStore } from '../../stores/theme';
 import { useAuth } from '../../lib/auth';
-import { useNavigationStore } from '../../stores/navigation';
 
 import logo from '../../assets/logo.png';
 
@@ -142,7 +141,7 @@ export const MainLayout = (props: MainLayoutProps) => {
                 >
                     <div>
                         <Link to="/">
-                            <img src={logo} height='50' />
+                            <img src={logo} height='50' alt='logo' />
                         </Link>
                     </div>
                     {headerItems.map(item => (

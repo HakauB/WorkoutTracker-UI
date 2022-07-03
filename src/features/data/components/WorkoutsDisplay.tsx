@@ -4,7 +4,7 @@ import { useState } from "react";
 import { ExerciseType } from "../../exercisetypes";
 import { useExerciseTypes } from "../../exercisetypes/api/getExerciseTypes";
 import { useWorkoutsNestedWithParams } from "../api/workoutsnested";
-import { Exercise, ExerciseNested, ExerciseSet, Workout, WorkoutNested } from "../types";
+import { ExerciseNested, ExerciseSet, WorkoutNested } from "../types";
 
 type WorkoutsTableProps = {
     startDate?: string;
@@ -132,7 +132,7 @@ type WorkoutsDisplayProps = {
 export const WorkoutsDisplay = (props: WorkoutsDisplayProps) => {
     const [startDate, setStartDate] = useState<string>("");
     const [endDate, setEndDate] = useState<string>("");
-    const [datePerformed, setDatePerformed] = useState<string>("");
+    const [datePerformed] = useState<string>("");
 
     return (
         <>

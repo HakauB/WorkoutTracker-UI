@@ -1,8 +1,6 @@
 import { Button, List, Space, Spin } from "antd";
-import { Link } from "react-router-dom";
 import { useModalStore } from "../../../stores/modals";
 import { useExerciseTypes } from "../api/getExerciseTypes";
-import { ExerciseType } from "../types";
 import { CreateExerciseTypeModal } from "./CreateExerciseTypeModal";
 
 type ListExerciseTypesProps = {

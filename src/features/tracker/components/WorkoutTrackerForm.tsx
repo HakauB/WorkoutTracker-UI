@@ -1,12 +1,10 @@
-import React from 'react';
-import { useForm } from 'react-hook-form';
-import { Form, Card, Row, Col, Input, Button, Space, Select, DatePicker, Spin, Divider } from 'antd';
+import { Form, Card, Row, Col, Input, Button, Select, DatePicker, Spin, Divider } from 'antd';
 import { PlusOutlined, MinusCircleOutlined } from '@ant-design/icons';
 
 import { ExerciseSetForm } from './ExerciseSetForm';
 import { useExerciseTypes } from '../../exercisetypes/api/getExerciseTypes';
 
-import { useCreateWorkoutNested, CreateWorkoutNestedDTO, WorkoutNested } from '../../data';
+import { useCreateWorkoutNested } from '../../data';
 import moment from 'moment';
 import { useNavigate, useParams } from 'react-router-dom';
 
@@ -38,12 +36,11 @@ type WorkoutTrackerFormProps = {
 }
 
 export const WorkoutTrackerForm = (props: WorkoutTrackerFormProps) => {
-    const { control } = useForm();
     const params = useParams();
     const { data: exerciseTypes, isLoading: isLoadingExerciseTypes } = useExerciseTypes();
     const navigate = useNavigate();
 
-    const { mutateAsync, isLoading } = useCreateWorkoutNested();
+    const { mutateAsync } = useCreateWorkoutNested();
 
     const handleSubmit = (values: any) => {
         // console.log(values);

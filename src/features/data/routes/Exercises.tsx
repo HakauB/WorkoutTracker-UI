@@ -1,4 +1,4 @@
-import { ExercisesDisplay, ExercisesTable } from "../components/ExercisesDisplay"
+import { ExercisesDisplay } from "../components/ExercisesDisplay"
 
 export const Exercises = () => {
     return (

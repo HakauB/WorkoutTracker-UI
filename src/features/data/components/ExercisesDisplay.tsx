@@ -2,9 +2,7 @@ import { DatePicker, Space, Spin, Table } from "antd";
 import moment from "moment";
 import { useState } from "react";
 import { ExerciseType } from "../../exercisetypes";
-import { getExerciseType } from "../../exercisetypes/api/getExerciseType";
 import { useExerciseTypes } from "../../exercisetypes/api/getExerciseTypes";
-import { useExercisesNested } from "../api/exercisesnested/getExercisesNested";
 import { useExercisesNestedWithParams } from "../api/exercisesnested/getExercisesNestedWithParams";
 import { ExerciseNested, ExerciseSet } from "../types";
 
@@ -108,7 +106,7 @@ type ExercisesDisplayProps = {
 export const ExercisesDisplay = (props: ExercisesDisplayProps) => {
     const [startDate, setStartDate] = useState<string>("");
     const [endDate, setEndDate] = useState<string>("");
-    const [datePerformed, setDatePerformed] = useState<string>("");
+    const [datePerformed] = useState<string>("");
 
     return (
         <>

@@ -3,7 +3,6 @@ import moment from "moment";
 import { useState } from "react";
 import { ExerciseType } from "../../exercisetypes";
 import { useExerciseTypes } from "../../exercisetypes/api/getExerciseTypes";
-import { useExerciseSets } from "../api/exercisesets";
 import { useExerciseSetsWithParams } from "../api/exercisesets/getExerciseSetsWithParams";
 import { ExerciseSet } from "../types";
 
@@ -94,7 +93,7 @@ type ExerciseSetDisplayProps = {
 export const ExerciseSetDisplay = (props: ExerciseSetDisplayProps) => {
     const [startDate, setStartDate] = useState<string>("");
     const [endDate, setEndDate] = useState<string>("");
-    const [datePerformed, setDatePerformed] = useState<string>("");
+    const [datePerformed] = useState<string>("");
 
     return (
         <>

@@ -1,6 +1,4 @@
-import { Space, Spin } from "antd"
-import { useEffect } from "react";
-import { useNavigate } from "react-router-dom"
+import { Space, Spin } from "antd";
 import { useAuth } from "../../lib/auth";
 import { PublicLayout } from '../Layout/PublicLayout';
 
@@ -9,17 +7,7 @@ type LoggedOutProps = {
 }
 
 export const LoggedOut = (props: LoggedOutProps) => {
-    const navigate = useNavigate();
-    const { logout, isLoggingOut } = useAuth();
-
-    const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
-
-    // useEffect(() => {
-    //     setTimeout(
-    //         () => navigate("/"),
-    //         3000
-    //     );
-    // });
+    const { isLoggingOut } = useAuth();
 
     if (isLoggingOut) {
         return (

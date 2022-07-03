@@ -1,4 +1,3 @@
-const storagePrefix = "workout_tracker_";
 
 const storage = {
     getToken: () => {

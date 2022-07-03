@@ -1,4 +1,4 @@
-import { ExerciseSetDisplay, ExerciseSetTable } from "../components/ExerciseSetDisplay";
+import { ExerciseSetDisplay } from "../components/ExerciseSetDisplay";
 
 export const ExerciseSets = () => {
     return (
