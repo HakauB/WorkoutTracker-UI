@@ -1,11 +1,13 @@
 import { Button, Col, Row, Space } from 'antd';
 import { Link } from 'react-router-dom';
+import { useAuth } from '../../lib/auth';
 import { PublicLayout } from '../Layout/PublicLayout';
 
 type LandingPageProps = {
 }
 
 export const LandingPage = (props: LandingPageProps) => {
+    const { logout } = useAuth();
     return (
         <PublicLayout>
             <Space
@@ -34,7 +36,7 @@ export const LandingPage = (props: LandingPageProps) => {
                         span={12}
                     >
                         <Link to="./auth/register">
-                            <Button type="primary">Register</Button>
+                            <Button type="primary" onClick={() => logout()}>Register</Button>
                         </Link>
                     </Col>
                     <Col
@@ -44,7 +46,7 @@ export const LandingPage = (props: LandingPageProps) => {
                         }}
                     >
                         <Link to="./auth/login">
-                            <Button type="primary">Login</Button>
+                            <Button type="primary" onClick={() => logout()}>Login</Button>
                         </Link>
                     </Col>
                 </Row>
