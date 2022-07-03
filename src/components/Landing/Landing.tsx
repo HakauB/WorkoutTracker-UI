@@ -10,7 +10,7 @@ type LandingPageProps = {
 export const LandingPage = (props: LandingPageProps) => {
     useEffect(() => {
         storage.clearToken();
-    });
+    }, []);
 
     return (
         <PublicLayout>
