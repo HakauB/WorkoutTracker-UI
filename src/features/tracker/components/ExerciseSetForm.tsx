@@ -45,7 +45,7 @@ export const ExerciseSetForm = (props: ExerciseSetFormProps) => {
                                             <Input placeholder="Weight" />
                                         </Form.Item>
 
-                                        <Form.Item
+                                        {/* <Form.Item
                                             {...exerciseSet}
                                             name={[exerciseSet.name, "percentage"]}
                                             fieldKey={[exerciseSet.key, "percentage"]}
@@ -53,7 +53,7 @@ export const ExerciseSetForm = (props: ExerciseSetFormProps) => {
                                             rules={[{ required: false, }]}
                                         >
                                             <Input placeholder="Percentage" />
-                                        </Form.Item>
+                                        </Form.Item> */}
 
                                         <MinusCircleOutlined
                                             onClick={() => {

@@ -140,7 +140,7 @@ export const MainLayout = (props: MainLayoutProps) => {
                     }}
                 >
                     <div>
-                        <Link to="/">
+                        <Link to="/app">
                             <img src={logo} height='50' alt='logo' />
                         </Link>
                     </div>
