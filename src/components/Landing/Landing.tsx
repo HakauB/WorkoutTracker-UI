@@ -1,6 +1,5 @@
 import { Button, Col, Row, Space } from 'antd';
 import { Link } from 'react-router-dom';
-import { useAuth } from '../../lib/auth';
 import storage from '../../utils/storage';
 import { PublicLayout } from '../Layout/PublicLayout';
 
