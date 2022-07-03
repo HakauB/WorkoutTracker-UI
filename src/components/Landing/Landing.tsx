@@ -34,7 +34,7 @@ export const LandingPage = (props: LandingPageProps) => {
                     <Col
                         span={12}
                     >
-                        <Link to="./auth/register">
+                        <Link to="./auth/register" onClick={() => storage.clearToken()}>
                             <Button type="primary" onClick={() => storage.clearToken()}>Register</Button>
                         </Link>
                     </Col>
@@ -44,7 +44,7 @@ export const LandingPage = (props: LandingPageProps) => {
                             paddingLeft: "120px",
                         }}
                     >
-                        <Link to="./auth/login">
+                        <Link to="./auth/login" onClick={() => storage.clearToken()}>
                             <Button type="primary" onClick={() => storage.clearToken()}>Login</Button>
                         </Link>
                     </Col>
