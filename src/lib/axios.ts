@@ -13,7 +13,7 @@ function authRequestInterceptor(config: AxiosRequestConfig) {
 }
 
 export const axios = Axios.create({
-    baseURL: '127.0.0.1:8000',
+    baseURL: 'http://127.0.0.1:8000',
 });
 
 const parseErrorResponseData = (error: any) => {
