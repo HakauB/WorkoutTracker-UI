@@ -1,4 +1,5 @@
 import { Button, Col, Row, Space } from 'antd';
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import storage from '../../utils/storage';
 import { PublicLayout } from '../Layout/PublicLayout';
@@ -7,6 +8,10 @@ type LandingPageProps = {
 }
 
 export const LandingPage = (props: LandingPageProps) => {
+    useEffect(() => {
+        storage.clearToken();
+    });
+
     return (
         <PublicLayout>
             <Space
