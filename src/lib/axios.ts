@@ -13,7 +13,7 @@ function authRequestInterceptor(config: AxiosRequestConfig) {
 }
 
 export const axios = Axios.create({
-    baseURL: 'http://workouttracker-api-dev.us-west-2.elasticbeanstalk.com'
+    baseURL: 'https://api.workouttracker.link',
 });
 
 const parseErrorResponseData = (error: any) => {
