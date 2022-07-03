@@ -28,6 +28,7 @@ export const WorkoutInfoModal = (props: WorkoutInfoModalProps) => {
             visible={isCalendarWorkoutInfoModalVisible}
             onCancel={hideCalendarWorkoutInfoModal}
             onOk={hideCalendarWorkoutInfoModal}
+            footer={null}
         >
             {workoutData.exercises.map((exercise) => (
                 <Card

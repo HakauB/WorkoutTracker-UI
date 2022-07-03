@@ -46,8 +46,8 @@ export const ConfirmDeleteExerciseTypeModal = (props: ConfirmDeleteExerciseTypeM
                 </Form.Item>
                 <Form.Item
                     wrapperCol={{
-                        offset: 8,
-                        span: 16,
+                        offset: 10,
+                        span: 14,
                     }}
                 >
                     <Button type="primary" htmlType="submit" loading={isLoading}>
