@@ -10,7 +10,7 @@ export const PublicLayout = (props: PublicLayoutProps) => {
         <>
             <div>
                 <Link to="/">
-                    <img src={header} alt='header' />
+                    <img src={header} alt='header' width='300' />
                 </Link>
             </div>
             {props.children}

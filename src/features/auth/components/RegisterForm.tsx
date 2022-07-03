@@ -34,12 +34,6 @@ export const RegisterForm = (props: RegisterFormProps) => {
                 <Form
                     {...formLayout}
                     name="register"
-                    // labelCol={{
-                    // span: 8,
-                    // }}
-                    // wrapperCol={{
-                    // span: 16,
-                    // }}
                     initialValues={{
                         remember: true,
                     }}
@@ -68,13 +62,6 @@ export const RegisterForm = (props: RegisterFormProps) => {
                                 },
                             },
                         ]}
-                        wrapperCol={{
-                            span: 14,
-                            offset: 0,
-                        }}
-                        labelCol={{
-                            span: 6,
-                        }}
                     >
                         <Input />
                     </Form.Item>
@@ -88,13 +75,6 @@ export const RegisterForm = (props: RegisterFormProps) => {
                                 message: 'Please input your password!'
                             }
                         ]}
-                        wrapperCol={{
-                            span: 14,
-                            offset: 0,
-                        }}
-                        labelCol={{
-                            span: 6,
-                        }}
                     >
                         <Input type='password' />
                     </Form.Item>
@@ -108,12 +88,17 @@ export const RegisterForm = (props: RegisterFormProps) => {
                                 message: 'Please confirm your password!'
                             }
                         ]}
-                        wrapperCol={{
-                            span: 14,
-                            offset: 0,
+                        labelCol= {{
+                            xs: { span: 24 },
+                            sm: { span: 6 },
+                            md: { span: 6 },
+                            lg: { span: 6 },
                         }}
-                        labelCol={{
-                            span: 6,
+                        wrapperCol= {{
+                            xs: { span: 24 },
+                            sm: {span: 18 },
+                            md: {span: 18 },
+                            lg: {span: 18 },
                         }}
                     >
                         <Input type='password' />
@@ -138,9 +123,6 @@ export const RegisterForm = (props: RegisterFormProps) => {
                             type="primary"
                             htmlType="submit"
                             loading={isRegistering}
-                            style={{
-                                marginRight: '100px',
-                            }}
                         >
                             Register
                         </Button>

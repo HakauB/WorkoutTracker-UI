@@ -99,9 +99,6 @@ export const LoginForm = (props: LoginFormProps) => {
                             type="primary"
                             htmlType="submit"
                             loading={isLoggingIn}
-                            style={{
-                                marginRight: '100px',
-                            }}
                         >
                             Log in
                         </Button>
