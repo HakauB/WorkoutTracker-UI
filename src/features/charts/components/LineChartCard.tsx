@@ -57,10 +57,20 @@ export const lineChartOptions = {
         }
     },
     scales: {
+        x: {
+            title: {
+                display: true,
+                text: 'Date',
+            }
+        },
         y: {
             min: 0,
+            title: {
+                display: true,
+                text: 'Weight',
+            }
         }
-    }
+    },
 }
 
 type ResponsiveLineChartProps = {
