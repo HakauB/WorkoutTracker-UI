@@ -70,10 +70,10 @@ export const ExerciseSetForm = (props: ExerciseSetFormProps) => {
                                     <Button
                                         type="dashed"
                                         onClick={() => add()}
-                                        // style={{
-                                            // float: "right",
-                                            // width: '100%',
-                                        // }}
+                                        style={{
+                                            float: "right",
+                                            width: '100%',
+                                        }}
                                     >
                                         <PlusOutlined /> Add exercise set
                                     </Button>
