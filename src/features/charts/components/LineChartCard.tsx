@@ -59,6 +59,8 @@ export const lineChartOptions = {
     scales: {
         y: {
             min: 0,
+            label: 'Weight',
+            axisLabel: 'Weight',
         }
     }
 }
